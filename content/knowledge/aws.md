@@ -12,29 +12,29 @@ This is because:
   means that there's likely to be a service for whatever I want to do
 * Because they manage the underlying infrastructure, I can focus less on that
   and more on what I'm actually building
-* In turn, I only have to pay for what I use when I need it, rather than paying
-  for resources that I have access to all of the time but that I don't use
+* I only have to pay for what I use when I need it, rather than paying for
+  resources that I have access to all of the time but that I don't use
 
 ## Access
 
 I access AWS day-to-day through either the [AWS Console][console] or the
-[AWS CLI][cli]. However I sign in, I use SSO via Google, which is configured via
-[IAM Identity Center][iam-identity-center].
+[AWS CLI][cli]. Regardless of how I sign in, I use SSO via Google, which is
+configured via [IAM Identity Center][iam-identity-center].
 
 I can sign in with either:
 
 * My day-to-day Google account, which gives me read and write access to services
   that I use regularly
 * My administration Google account, which gives me full access to my AWS account
-  except some root-only operations
+  except some [root-only operations][iam-root-only]
 
 However, I also have two other ways of getting in that deliberately don't use
 SSO:
 
 * My break-glass IAM user, which gives me limited access to security and
   identity services, so that I can get in if SSO isn't working
-* My root credentials, which I only use [for things][iam-root-only] that only
-  that account can do
+* My root credentials, which I only use for [operations][iam-root-only] that
+  only that account can carry out
 
 Given how important my AWS account is to me and the value that it'd have to a
 hostile actor, I have:
@@ -42,9 +42,10 @@ hostile actor, I have:
 * Single sign-on in place for most accounts that can sign into AWS, which lets
   me focus on securing one door in rather than multiple
 * Multi-factor authentication required for every account that can sign into AWS,
-  including hardware tokens where my threat model indicates it's necessary
-* Alerts when any of my non-day-to-day accounts are used to sign into AWS, with
-  settings to ensure that those alerts both reach me and interrupt me, no matter
+  including hardware tokens where my threat model indicates that they're
+  necessary
+* Alerts when any of my non-day-to-day accounts are used to sign in, with
+  settings to ensure that those alerts both reach and interrupt me, no matter
   where I am or what I'm doing
 * Logs that record every time that my AWS account is signed into and what's done
   in my account, which I keep for at least a year
@@ -72,19 +73,19 @@ If I had multiple accounts, I'd have to:
   [only AWS Enterprise Support][support-billing] can be shared between accounts,
   which would become prohibitively expensive very quickly
 
-However, I have set up an [AWS Organizations][organizations] organisation that
+That said, I have set up an [AWS Organizations][organizations] organisation that
 contains my account. This is because I can't use
 [AWS Security Incident Response][security-ir] without having an organisation.
 
-In the future, I might create one account per environment. This would stop me
-from accidentally destroying resources for a workload in production whilst I'm
-developing or vice-versa.
+In the future, I might move away from this decision, and create one account per
+environment. This would stop me from accidentally destroying resources for a
+workload in production whilst I'm developing or vice-versa.
 
 ## Help and support
 
 I pay for [AWS Business Support+][support-plan] which provides me with access to
-their support team for help with my AWS account, their products and services,
-and [supported third-party platforms and applications][support-third-party], 24
+their support team for help with my account, their products and services, and
+[supported third-party platforms and applications][support-third-party], 24
 hours a day, 7 days a week.
 
 If I can't work something out myself, or it's something that only AWS can do,
