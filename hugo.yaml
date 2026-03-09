@@ -1,0 +1,11 @@
+languageCode: en-GB
+title: Digital Documentation
+
+enableGitInfo: true
+
+disableKinds:
+  - rss
+
+module:
+  imports:
+    - path: github.com/connorgurney/ssg-theme

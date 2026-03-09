@@ -1,0 +1,4 @@
+# Build artefacts
+/.hugo_build.lock
+/public/
+/resources/_gen/
